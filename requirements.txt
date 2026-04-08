@@ -1,4 +1,5 @@
 pyrogram
-yt-dlp
 tgcrypto
+yt-dlp
 flask
+curl_cffi
