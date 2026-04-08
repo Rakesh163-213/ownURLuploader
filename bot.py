@@ -32,9 +32,10 @@ async def send_thumbnail(client,message):
         "no_warnings": True,
         "skip_download": True,
         "writethumbnail": True,
-        "cookiefile": "cookies.txt",
+       # "cookiefile": "cookies.txt",
         
-        "impersonate": ImpersonateTarget(client='chrome', version='124'),
+#        "impersonate": ImpersonateTarget(client='chrome', version='124'),
+        "impersonate": "chrome",
         "nocheckcertificate": True,
         "socket_timeout": 10,
         "retries": 3,
