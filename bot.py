@@ -4,7 +4,12 @@ from yt_dlp import YoutubeDL
 from yt_dlp.networking.impersonate import ImpersonateTarget
 import subprocess
 import os
-from config import api_id,api_hash,bot_token
+#from config import api_id,api_hash,bot_token
+
+api_id = int(os.environ.get("API_ID"))
+api_hash = os.environ.get("API_HASH")
+bot_token = os.environ.get("BOT_TOKEN")
+
 bot = Client("Bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 
 
