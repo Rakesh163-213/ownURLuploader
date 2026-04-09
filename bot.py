@@ -2,11 +2,11 @@ import sys
 import logging
 
 # Set up logging to send output to stdout immediately
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)] 
-)
+#logging.basicConfig(
+#    level=logging.INFO,
+#    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+#    handlers=[logging.StreamHandler(sys.stdout)] 
+#)
 
 
 from pyrogram import Client, filters
@@ -39,7 +39,7 @@ async def send_thumbnail(client,message):
     url = message.text
     await message.reply("Downloading the Thumbnail.",quote=True)
     yt_opts = {
-        "logger": logging.getLogger("yt_dlp"),
+      #  "logger": logging.getLogger("yt_dlp"),
         "no_warnings": True,
         "skip_download": True,
         "writethumbnail": True,
