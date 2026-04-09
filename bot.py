@@ -31,7 +31,7 @@ async def send_thumbnail(client,message):
     url = message.text
     await message.reply("Downloading the Thumbnail.",quote=True)
     yt_opts = {
-        "logger": logging.getLogger(_name_),
+        "logger": logging.getLogger(__name__),
         "no_warnings": True,
         "skip_download": True,
         "writethumbnail": True,
