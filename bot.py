@@ -55,14 +55,14 @@ async def send_thumbnail(client,message):
         "outtmpl": '%(title)s.%(ext)s',
         "windowsfilenames": False,
         "sleep_interval": 3,
-#        "postprocessors": [
-#            {
-#                'key': "FFmpegThumbnailsConvertor",
-#                'format': "jpg",
-#                'when': "before_dl",
-#                }
-#
-#            ],
+        "postprocessors": [
+            {
+                'key': "FFmpegThumbnailsConvertor",
+                'format': "jpg",
+                'when': "before_dl",
+                }
+
+            ],
 #    'user_agent': 'Mozilla/5.0',    
         }
             
