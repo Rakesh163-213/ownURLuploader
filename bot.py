@@ -1,5 +1,13 @@
+import sys
 import logging
-logging.basicConfig(level=logging.INFO)
+
+# Set up logging to send output to stdout immediately
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)] 
+)
+
 
 from pyrogram import Client, filters
 from yt_dlp import YoutubeDL
@@ -31,7 +39,7 @@ async def send_thumbnail(client,message):
     url = message.text
     await message.reply("Downloading the Thumbnail.",quote=True)
     yt_opts = {
-        "logger": logging.getLogger(__name__),
+        "logger": logging.getLogger("yt_dlp"),
         "no_warnings": True,
         "skip_download": True,
         "writethumbnail": True,
