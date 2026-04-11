@@ -1,16 +1,15 @@
 #!/bin/bash
 
+# 1. Start Tor
 tor &
-
 sleep 20
-# 1. Start the Flask app in the background
-# The & allows the script to move to the next line immediately
-python app.py &
 
-# 2. Wait a few seconds to let Flask bind to the port
+# 2. Start Flask (using & to background it)
+# We use 'python3' to be safe and ensure the path is clear
+python3 /app/app.py &
+
+# 3. Wait for Flask
 sleep 5
 
-# 3. Start the Bot in the foreground
-# This keeps the container alive
-#python bot.py
-python python bot.py
+# 4. Start the Bot (no & here, this keeps the container running)
+python3 /app/bot.py
