@@ -23,4 +23,5 @@ COPY . .
 RUN chmod +x start.sh
 
 # Start the bot using your script
-CMD ["sh", "start.sh"]
+#CMD ["sh", "start.sh"]
+CMD ["/bin/bash", "start.sh"]
