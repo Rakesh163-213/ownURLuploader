@@ -124,6 +124,12 @@ async def send_video(client,message):
                 print('SENT SUCCESSFULLY')
                 os.remove(filename)
                 os.remove(thumb)
+                if os.path.exist(filename):
+                    await message.reply(filename,"Still exist.")
+                elif not os.path.exist(filename):
+                    await message.reply(filename,"Does not exist")
+
+                    
         else:
             await message.reply("Please send a valid URL.")
     else:
