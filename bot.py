@@ -81,6 +81,7 @@ async def send_video(client,message):
                 "outtmpl": '%(title)s.%(ext)s',
                 "merge_output_format": 'mp4',
                 "windowsfilenames": False,
+                "proxy": "socks5://127.0.0.1:9050",
                  "postprocessors": [
                      {
                          "key": 'FFmpegThumbnailsConvertor',
@@ -94,8 +95,7 @@ async def send_video(client,message):
 #                "sleep_interval": 3,
 #                "nocheckcertificate": True,
 #                "socket_timeout": 3,
-#                "retries": 10,
-#                "proxy": "socks5://127.0.0.1:9050", 
+#                "retries": 10, 
 #                "skip_download": True,
 #                "cookiefile": 'cookies.txt',
                 }
@@ -108,9 +108,18 @@ async def send_video(client,message):
                 thumb = f"{info['title']}.jpg"
                 width, height = fix_thumbnail(thumb)
                 filename = f"{info['title']}.mp4"
+                caption = filename
                 print(f"\nHERE IS THE FILE NAME {filename}\n")
                 await message.reply(f"Sending {filename}")
-                await bot.send_video(message.chat.id, filename,duration=duration,file_name="what.mp4",thumb=thumb,width=width,height=height)
+                await bot.send_video(
+                    message.chat.id,
+                    filename,
+                    duration=duration,
+                    thumb=thumb,
+                    width=width,
+                    height=height,
+                    caption=caption,
+                )
                 print('SENT SUCCESSFULLY')
                 os.remove(filename)
                 os.remove(thumb)
