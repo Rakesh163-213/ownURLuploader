@@ -104,7 +104,7 @@ async def send_video(client,message):
             with YoutubeDL(yt_opts) as yt:
                 yt.download([url])
                 info = yt.extract_info(url,download=True)
-                duration = int(info['formats'][0]['fragments'][0]['duration'])
+                duration = int(info.get('duration',0))
                 thumb = f"{info['title']}.jpg"
                 width, height = fix_thumbnail(thumb)
                 filename = f"{info['title']}.mp4"
