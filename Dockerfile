@@ -4,6 +4,7 @@ FROM python:3.10-slim
 # Install FFmpeg and other necessary system tools
 RUN apt-get update && apt-get install -y \
     ffmpeg \
+    tor \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory inside the container
