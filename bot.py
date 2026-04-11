@@ -109,7 +109,7 @@ async def send_video(client,message):
                 filename = f"{info['title']}.mp4"
                 print(f"\nHERE IS THE FILE NAME {filename}\n")
                 await message.reply(f"Sending {filename}")
-                await bot.send_video(message.chat.id, filename,duration=duration,file_name="what.mp4",thumb=thumb,width=300,height=300)
+                await bot.send_video(message.chat.id, filename,duration=duration,file_name="what.mp4",thumb=thumb,width=width,height=height)
                 print('SENT SUCCESSFULLY')
                 os.remove(filename)
                 os.remove(thumb)
