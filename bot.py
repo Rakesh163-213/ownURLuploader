@@ -103,7 +103,7 @@ async def send_video(client,message):
 
 
             with YoutubeDL(yt_opts) as yt:
-                yt.download([url])
+#                yt.download([url])
                 info = yt.extract_info(url,download=True)
                 duration = int(info.get('duration',0))
                 thumb = f"{info['title']}.jpg"
