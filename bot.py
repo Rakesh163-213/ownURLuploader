@@ -72,7 +72,7 @@ async def send_video(client,message):
     if message.from_user.id in admin_ids:
         if is_url(message.text) :
             url = message.text
-            await message.reply("Downloading the Video.",quote=True)
+            await message.reply("Downloading the Video...",quote=True)
             yt_opts = {
      #          "format" : "bestvideo+bestaudio/best",
                 "format": "bestvideo*+bestaudio/best",
