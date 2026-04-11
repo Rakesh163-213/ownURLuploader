@@ -9,24 +9,57 @@ import logging
 #)
 
 
+
+
+
+from PIL import Image
+def fix_thumbnail(path):
+    """Resizes image to max 320px and compresses to stay under 200KB."""
+    if not os.path.exists(path):
+        return None
+
+    img = Image.open(path)
+    img = img.convert("RGB")
+
+    # Resize while keeping aspect ratio (max side 320px)
+    img.thumbnail((320, 320))
+
+    # Save with optimization to ensure small file size
+    img.save(path, "JPEG", quality=75, optimize=True)
+
+    # Return new dimensions to tell Telegram how to display it
+    return img.size
+from urllib.parse import urlparse
+import subprocess
+def is_url(url):
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])
+    except ValueError:
+        return False
+
+# Testing it
+
 from pyrogram import Client, filters
 from yt_dlp import YoutubeDL
-from yt_dlp.networking.impersonate import ImpersonateTarget
+#from yt_dlp.networking.impersonate import ImpersonateTarget
 import subprocess
 import os
-#from config import api_id,api_hash,bot_token
 
 api_id = int(os.environ.get("api_id"))
 api_hash = os.environ.get("api_hash")
 bot_token = os.environ.get("bot_token")
 
+
 bot = Client("Bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 
 
+admin_ids = [8063495170]
+path = "downloads"
 
 @bot.on_message(filters.command("start") & filters.private)
 async def start_cmd(clinet,message):
-    await message.reply("Send a Video Url to get its Thumbnail in jpg format!")
+    await message.reply("Send a Url to download the video")
 
 
 
@@ -34,54 +67,59 @@ async def start_cmd(clinet,message):
 
 
 @bot.on_message(filters.private & ~filters.command("start"))
-async def send_thumbnail(client,message):
+async def send_video(client,message):
+    print(is_url(message.text))
+    if message.from_user.id in admin_ids:
+        if is_url(message.text) :
+            url = message.text
+            await message.reply("Downloading the Video.",quote=True)
+            yt_opts = {
+                "format" : "bestvideo+bestaudio",
+                "no_warnings": True,
+                "writethumbnail": True,
+                "outtmpl": '%(title)s.%(ext)s',
+                "merge_output_format": 'mp4',
+                "windowsfilenames": False,
+                 "postprocessors": [
+                     {
+                         "key": 'FFmpegThumbnailsConvertor',
+                         "format": "jpg",
+                         }
+                    
+                     ],
+#                "quiet": True,
+#                "user_agent": 'Mozilla/5.0',   
 
-    url = message.text
-    await message.reply("Downloading the Thumbnail.",quote=True)
-    yt_opts = {
-      #  "logger": logging.getLogger("yt_dlp"),
-        "no_warnings": True,
-        "skip_download": True,
-        "writethumbnail": True,
-       # "cookiefile": "cookies.txt",
-        
-#        "impersonate": ImpersonateTarget(client='chrome', version='124'),
-     #   "impersonate": "chrome",
-        "nocheckcertificate": True,
-        "socket_timeout": 10,
-        "retries": 3,
-    #    "proxy": "socks5://127.0.0.1:9050",
-#        "quiet": True,
-        "outtmpl": '%(title)s.%(ext)s',
-        "windowsfilenames": False,
-        "sleep_interval": 3,
-        "postprocessors": [
-            {
-                'key': "FFmpegThumbnailsConvertor",
-                'format': "jpg",
-                'when': "before_dl",
+#                "sleep_interval": 3,
+#                "nocheckcertificate": True,
+#                "socket_timeout": 3,
+#                "retries": 10,
+#                "proxy": "socks5://127.0.0.1:9050", 
+#                "skip_download": True,
+#                "cookiefile": 'cookies.txt',
                 }
 
-            ],
-#    'user_agent': 'Mozilla/5.0',    
-        }
-            
-    
 
-    with YoutubeDL(yt_opts) as yt:
-#        yt.download([url])
-        info = yt.extract_info(url,download=True)
-#        filename = f"/data/data/com.termux/files/home/code/Telegram/{info['title']}.jpg"
+            with YoutubeDL(yt_opts) as yt:
+                yt.download([url])
+                info = yt.extract_info(url,download=True)
+                duration = int(info['formats'][0]['fragments'][0]['duration'])
+                thumb = f"{info['title']}.jpg"
+                width, height = fix_thumbnail(thumb)
+                filename = f"{info['title']}.mp4"
+                print(f"\nHERE IS THE FILE NAME {filename}\n")
+                await message.reply(f"Sending {filename}")
+                await bot.send_video(message.chat.id, filename,duration=duration,file_name="what.mp4",thumb=thumb,width=300,height=300)
+                print('SENT SUCCESSFULLY')
+                os.remove(filename)
+                os.remove(thumb)
+        else:
+            await message.reply("Please send a valid URL.")
+    else:
+        await message.reply("You are not Authorised to use this bot.\n Please ask admins for help.")
 
-        filename = f"{info['title']}.jpg"
-        print("HERE IS THE FILE NAME ",filename)
+#    await bot.send_vidro(message.chat.id ) 
 
-
-    
-    await bot.send_photo(message.chat.id, filename)
-
-    os.remove(filename)
 
 print("Starting the bot")
 bot.run()
-
