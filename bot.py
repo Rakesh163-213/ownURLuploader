@@ -95,7 +95,7 @@ async def send_video(client,message):
 
                 "sleep_interval": 3,
 #                "nocheckcertificate": True,
-                "socket_timeout": 30,
+                "socket_timeout": 10,
                 "retries": 10, 
 #                "skip_download": True,
 #                "cookiefile": 'cookies.txt',
