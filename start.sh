@@ -1,5 +1,8 @@
 #!/bin/bash
 
+tor &
+
+sleep 20
 # 1. Start the Flask app in the background
 # The & allows the script to move to the next line immediately
 python app.py &
