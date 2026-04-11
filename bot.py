@@ -82,6 +82,7 @@ async def send_video(client,message):
                 "merge_output_format": 'mp4',
                 "windowsfilenames": False,
                 "proxy": "socks5://127.0.0.1:9050",
+                "fragment_retries": 10,
                  "postprocessors": [
                      {
                          "key": 'FFmpegThumbnailsConvertor',
@@ -92,10 +93,10 @@ async def send_video(client,message):
 #                "quiet": True,
 #                "user_agent": 'Mozilla/5.0',   
 
-#                "sleep_interval": 3,
+                "sleep_interval": 3,
 #                "nocheckcertificate": True,
-#                "socket_timeout": 3,
-#                "retries": 10, 
+                "socket_timeout": 30,
+                "retries": 10, 
 #                "skip_download": True,
 #                "cookiefile": 'cookies.txt',
                 }
