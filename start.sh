@@ -12,4 +12,5 @@ sleep 5
 
 # 3. Start the Bot in the foreground
 # This keeps the container alive
-python bot.py
+#python bot.py
+python python bot.py
