@@ -56,7 +56,7 @@ async def send_video(client, message):
         msg = await message.reply("Processing link...", quote=True)
 
         # 1. Extract Metadata
-        info_cmd = ["yt-dlp", "--dump-json", "--cookiefile", "cookies.txt", url]
+        info_cmd = ["yt-dlp", "--dump-json", "--cookies", "cookies.txt", url]
         stdout, stderr = await run_command(info_cmd)
         
         if not stdout:
