@@ -8,27 +8,6 @@
 #    handlers=[logging.StreamHandler(sys.stdout)] 
 #)
 
-
-
-
-
-from PIL import Image
-def fix_thumbnail(path):
-    """Resizes image to max 320px and compresses to stay under 200KB."""
-    if not os.path.exists(path):
-        return None
-
-    img = Image.open(path)
-    img = img.convert("RGB")
-
-    # Resize while keeping aspect ratio (max side 320px)
-    img.thumbnail((320, 320))
-
-    # Save with optimization to ensure small file size
-    img.save(path, "JPEG", quality=75, optimize=True)
-
-    # Return new dimensions to tell Telegram how to display it
-    return img.size
 from urllib.parse import urlparse
 import subprocess
 def is_url(url):
@@ -58,6 +37,27 @@ bot = Client("Bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 admin_ids = [8063495170]
 path = "downloads"
 
+
+
+from PIL import Image
+
+def get_thumbnail(filename, thumb):
+    print(filename)
+    subprocess.run(["ffmpeg","-i", filename,"-ss", "00:00:01.000","-vframes", "1",thumb])
+
+
+
+def get_size(thumb):
+    img = Image.open(thumb)
+    img.thumbnail((320,320))
+    img.save(thumb)
+    return img.size
+
+
+
+
+
+
 @bot.on_message(filters.command("start") & filters.private)
 async def start_cmd(clinet,message):
     await message.reply("Send a Url to download the video")
@@ -75,32 +75,20 @@ async def send_video(client,message):
             url = message.text
             await message.reply("Downloading the Video...",quote=True)
             yt_opts = {
-     #          "format" : "bestvideo+bestaudio/best",
+#               "format" : "bestvideo+bestaudio/best",
                 "format": "best",
                 "no_warnings": True,
-                "writethumbnail": True,
                 "outtmpl": '%(title)s.%(ext)s',
                 "merge_output_format": 'mp4',
                 "windowsfilenames": False,
                 'impersonate': ImpersonateTarget(client='chrome', version='136', os=None, os_version=None),
-#                "proxy": "socks5://127.0.0.1:9050",
                 "fragment_retries": 10,
-                 "postprocessors": [
-                     {
-                         "key": 'FFmpegThumbnailsConvertor',
-                         "format": "jpg",
-                         }
-                    
-                     ],
-#                "quiet": True,
-#                "user_agent": 'Mozilla/5.0',   
-
                 "sleep_interval": 3,
                 "nocheckcertificate": True,
                 "socket_timeout": 60,
                 "retries": 10, 
-#                "skip_download": True,
-            #    "cookiefile": 'cookies.txt',
+#                "cookiefile": 'cookies.txt',
+#                "proxy": "socks5://127.0.0.1:9050",
                 }
 
 
@@ -108,12 +96,13 @@ async def send_video(client,message):
 #                yt.download([url])
                 info = yt.extract_info(url,download=True)
                 duration = int(info.get('duration',0))
-                thumb = f"{info['title']}.jpg"
-                width, height = fix_thumbnail(thumb)
                 filename = f"{info['title']}.mp4"
+                thumb = f"{info['title']}.jpg"
+                get_thumbnail(filename,thumb)
+                width, height = get_size(thumb)
                 caption = filename
                 print(f"\nHERE IS THE FILE NAME {filename}\n")
-                await message.reply(f"Sending {filename}")
+                await message.reply(f"Sending: {filename}")
                 await bot.send_video(
                     message.chat.id,
                     filename,
@@ -127,10 +116,10 @@ async def send_video(client,message):
                 os.remove(filename)
                 os.remove(thumb)
                 if os.path.exists(filename):
-                    await message.reply(filename,"Still exist.")
+                    await message.reply(f"{filename} Still exist.")
                 
                 elif not os.path.exists(filename):
-                    await message.reply(filename,"Does not exist")
+                    await message.reply(f"{filename} Does not exist.")
 
                     
         else:
