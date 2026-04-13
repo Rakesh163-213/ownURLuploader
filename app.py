@@ -9,6 +9,6 @@ def home():
 
 if __name__ == "__main__":
     # Koyeb passes a PORT variable; we use 8000 as a backup
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
     
