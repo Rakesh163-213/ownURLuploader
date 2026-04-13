@@ -75,7 +75,7 @@ async def send_video(client,message):
             await message.reply("Downloading the Video...",quote=True)
             yt_opts = {
      #          "format" : "bestvideo+bestaudio/best",
-                "format": "bestvideo*+bestaudio/best",
+                "format": "best",
                 "no_warnings": True,
                 "writethumbnail": True,
                 "outtmpl": '%(title)s.%(ext)s',
