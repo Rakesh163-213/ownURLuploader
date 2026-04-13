@@ -1,0 +1,11 @@
+# Netscape HTTP Cookie File
+# https://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file! Do not edit.
+
+.xhamster.com	TRUE	/	FALSE	1807610461	cookie_accept_v2	%7B%22e%22%3A1%2C%22f%22%3A1%2C%22t%22%3A1%2C%22a%22%3A1%7D
+.xhamster.com	TRUE	/	TRUE	1778666362	_cfg	373576bd60fe0d07aa550af35627fe64
+.xhamster.com	TRUE	/	FALSE	1807610362	ff_thumb_offset	2
+.xhamster.com	TRUE	/	FALSE	1776075262	recs_show_time	1776074361
+.xhamster.com	TRUE	/	FALSE	1807610362	moments_listing_ad_offset	2
+.xhamster.com	TRUE	/	FALSE	1807611057	parental-control	yes
+.xhamster.com	TRUE	/	FALSE	1807611056	settings	eyJpc1dlYnBTdXBwb3J0ZWQiOm51bGwsImlzV2VibVN1cHBvcnRlZCI6bnVsbCwiZXh0RGV0ZWN0ZWRWMiI6ZmFsc2UsIm1vbWVudHNJc0hpZGRlbiI6bnVsbCwidHJ1c3RVUkxzIjpbInhoYW1zdGVyLmNvbSJdLCJpc1NpZGViYXJIaWRkZW4iOm51bGwsImV4cGlyZXMiOnsiZXh0RGV0ZWN0ZWRWMiI6MTc3NjA3MzgyOSwidHJ1c3RVUkxzIjoxNzc2MDgyMjU2fSwidHNTcG90Q291bnRlcnMiOlt7InNwb3QiOiJtYXN0ZXJfbW9iaWxlX2hlYWRlciIsInRpbWUiOjE3NzYwNzQzNjEsImNvdW50IjoxfSx7InNwb3QiOiJtYXN0ZXJfbW9iaWxlX21pZGRsZSIsInRpbWUiOjE3NzYwNzQzNjEsImNvdW50IjoxfSx7InNwb3QiOiJtYXN0ZXJfbW9iaWxlX2Zvb3RlciIsInRpbWUiOjE3NzYwNzQzNjEsImNvdW50IjoxfV19
