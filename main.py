@@ -75,7 +75,7 @@ async def send_video(client, message):
             "yt-dlp",
             "-f", "bestvideo[height<=720]+bestaudio/best",
             "--merge-output-format", "mp4",
-            "--cookiefile", "cookies.txt",
+            "--cookies", "cookies.txt",
             "--referer", "https://www.google.com",
             "--writethumbnail",
             "--postprocessor-args", "ffmpeg:-ss 00:00:01 -vframes 1",
