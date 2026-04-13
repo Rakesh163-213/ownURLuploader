@@ -42,6 +42,7 @@ def is_url(url):
 
 from pyrogram import Client, filters
 from yt_dlp import YoutubeDL
+from yt_dlp.networking.impersonate import ImpersonateTarget
 #from yt_dlp.networking.impersonate import ImpersonateTarget
 import subprocess
 import os
@@ -81,7 +82,7 @@ async def send_video(client,message):
                 "outtmpl": '%(title)s.%(ext)s',
                 "merge_output_format": 'mp4',
                 "windowsfilenames": False,
-                "impersonate": "chrome",
+                'impersonate': ImpersonateTarget(client='chrome', version='136', os=None, os_version=None),
 #                "proxy": "socks5://127.0.0.1:9050",
                 "fragment_retries": 10,
                  "postprocessors": [
