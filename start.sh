@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 1. Start Tor
-tor &
-sleep 20
+#tor &
+#sleep 20
 
 # 2. Start Flask (using & to background it)
 # We use 'python3' to be safe and ensure the path is clear
