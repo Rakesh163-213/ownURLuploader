@@ -110,7 +110,7 @@ async def send_video(client,message):
                 width, height = fix_thumbnail(thumb)
                 filename = f"{info['title']}.mp4"
                 caption = filename
-                print(f"\nHERE IS THE FILE NAME {filename}\n",flush=True)
+                print(f"\nHERE IS THE FILE NAME {filename}\n")
                 await message.reply(f"Sending {filename}")
                 await bot.send_video(
                     message.chat.id,
@@ -121,7 +121,7 @@ async def send_video(client,message):
                     height=height,
                     caption=caption,
                 )
-                print('SENT SUCCESSFULLY',flush=True)
+                print('SENT SUCCESSFULLY')
                 os.remove(filename)
                 os.remove(thumb)
                 if os.path.exists(filename):
