@@ -117,9 +117,8 @@ async def send_video(client,message):
                 os.remove(thumb)
                 if os.path.exists(filename):
                     await message.reply(f"{filename} Still exist.")
-                
-                elif not os.path.exists(filename):
-                    await message.reply(f"{filename} Does not exist.")
+                else:
+                    pass
 
                     
         else:
