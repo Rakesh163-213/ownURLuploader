@@ -1,4 +1,4 @@
-from urllib.parse import urlparse~/.
+from urllib.parse import urlparse
 def is_url(url):
     try:
         result = urlparse(url)
