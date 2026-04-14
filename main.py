@@ -22,9 +22,9 @@ api_id = int(os.environ.get("api_id"))
 api_hash = os.environ.get("api_hash")
 bot_token = os.environ.get("bot_token")
 
-bot = Client("ses/zoleXforwardbot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
+bot = Client("Main",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 
-#bot = Client("ses/zoleXforwardbot")
+
 
 admin_ids = [8063495170]
 path = "downloads"
