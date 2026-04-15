@@ -12,4 +12,4 @@ python3 /app/app.py &
 sleep 5
 
 # 4. Start the Bot (no & here, this keeps the container running)
-python3 /app/main.py
+python3 /app/bot.py
