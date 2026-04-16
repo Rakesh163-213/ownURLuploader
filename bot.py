@@ -43,7 +43,7 @@ from PIL import Image
 
 def get_thumbnail(filename, thumb):
     print(filename)
-    subprocess.run(["ffmpeg","-i", filename,"-ss", "00:00:01.000","-vframes", "1",thumb])
+    subprocess.run(["ffmpeg","-i", filename,"-ss", "00:00:07.000","-vframes", "1",thumb])
 
 
 
